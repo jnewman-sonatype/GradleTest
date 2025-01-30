@@ -15,12 +15,44 @@ repositories {
     mavenCentral()
 }
 
+// Project property
+ext {
+    commonsIoVersion = "1.3.2"
+}
+
+// Groovy variable - Dynamic typed
+def jacksonCoreVersion = '2.8.4'
+
+// Groovy variable - Static typed
+String jacksonDatabindVersion = '2.12.4'
+
 dependencies {
-    // Use JUnit test framework.
+    // Use JUnit test framework. Version defintion is from the libs.versions.toml file.
     testImplementation libs.junit
 
-    // This dependency is used by the application.
+    // This dependency is used by the application. Version defintion is from the libs.versions.toml file.
     implementation libs.guava
+    
+    // Beginning of dependency definintions for SCM scanning test.
+    
+    // Example vulnerable dependency. String dependency notation.
+    implementation "org.apache.logging.log4j:log4j-core:2.13.3"
+    
+    // Example vulnerable dependency. Map dependency notation.
+    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.2.2'
+    
+    // Example vulnerable dependency. Variable used for version is defined in ext block.
+    implementation "commons-io:commons-io:$commonsIoVersion"
+    
+    // Example vulnerable dependency. Dynamic typed Groovy variable used for version definition.
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonCoreVersion
+    
+    // Example vulnerable dependency. Static typed Groovy variable used for version definition.
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonDatabindVersion
+       
+    // Example vulnerable dependency. Variable used for version is defined in gradle.properties file.
+    implementation "taglibs:standard:${taglibsStandardVersion}"
+    
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
