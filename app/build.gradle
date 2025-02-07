@@ -51,7 +51,7 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonDatabindVersion
        
     // Example vulnerable dependency. Variable used for version is defined in gradle.properties file.
-    implementation "taglibs:standard:${taglibsStandardVersion}"
+    implementation "taglibs:standard:$taglibsStandardVersion"
     
 }
 
